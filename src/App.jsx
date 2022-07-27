@@ -33,7 +33,7 @@ function App() {
         <div className="grid h-screen grid-rows-3 items-center">
           <img
                 src={ldlogo}
-                className="mx-auto row-start-1 xl:row-start-2 App-pulse h-56 lg:h-60 2xl:h-80"
+                className="mx-auto row-start-2 xl:row-start-2 App-pulse h-56 lg:h-60 2xl:h-80"
                 alt="logo"
               />
           <div className="body mx-auto row-start-3 w-full xl:w-1/3 items-center">
