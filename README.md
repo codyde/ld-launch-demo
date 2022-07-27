@@ -1,4 +1,4 @@
-# Releasing Features in 5 Minutes with LaunchDarkly
+# First Flags with LaunchDarkly
 
 ![](./osmo.png)
 
