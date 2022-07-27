@@ -1,42 +1,48 @@
-# LaunchDarkly Flag Demo Application 
+# Releasing Features in 5 Minutes with LaunchDarkly
 
-This appalication is designed to use several feature flags to showcase the ability to release features in a variety of ways. 
+![](./osmo.png)
 
-## Running this application 
+This application is designed to use several feature flags to showcase the ability to release features quickly using [LaunchDarkly](https://www.launchdarkly.com). 
 
-This application can be deployed to many different providers, in order for it to run successfully you'll need to leverage an environment variable named `VITE_LD_CLIENT_ID` with the **Client Side SDK** key from LaunchDarkly 
+**Note** - Sign up for a [free trial of LaunchDarkly](https://app.launchdarkly.com/signup) to explore creating these Feature Flags. <br>These can be created manually in the portal, or automatically leveraging tools like Terraform (instructions included!). 
 
-For example - 
 
-```bash
-export VITE_LD_CLIENT_ID=<your client ID>
-```
+## Editing and Building in Replit
 
-### Editing and building in Replit
+**:warning: Important** - You'll need to create a secret in replit that references your LaunchDarkly <br>**Client-side ID**. 
 
-Using [Replit](https://www.replit.com) you can find a repl of this application under [@launchdarkly/LaunchDarkly Feature Flag Demo](https://replit.com/@LaunchDarkly/LaunchDarkly-Feature-Flag-Demo?v=1). Select `Fork Template` to run your own repl. 
+The secret should be named: 
+> VITE_LD_CLIENT_ID
 
-In Replit, you'll need to create a secret that uses the above environment variable to start your repl with the correct information. 
+and the value should hold be the `Client-side ID`
 
-## Feature Flags 
+**:warning: Potential gotcha**: make sure you got the **"Client-side ID"** from the LaunchDarkly console and not one of the other keys! You can get this easily by pressing CMD+K or CTRL+K, typing "copy" and selecting `Copy SDK key for the current environment` and selecting **"Client-side ID"** from the list. This will add it to your clipboard for easy copy and paste. 
 
-This application uses several feature flags to show LaunchDarkly functionality 
 
-* `qrCode` - This feature flag controls the presence of the QR code in the application. You can modify the URL that returns in this by modifying the variable on Line 3 of `/src/components/qrCode.js`
-* `prodHeader` - This feature flag controls the shifting from the introduction of the application, to the updated header with the login URL. This is a standard release of a new feature 
-* `upperimage` - This feature displays the image at the top of the page, in the talk track, we build a **individual target** pointed at the specific user who logs on the lefthand side of the page 
-* `logoversion` - This feature swaps the Osmo image for toggle. We can use this with either device or browser type targeting rules, or perform a progressive rollout to show 50/50 splits (or other percentages) of the old and new version 
-* `cardshow`- This controls the rollout of new feature cards demonstrating "Release" on the bottom of the page
+## Setting up the Feature Flags in LaunchDarkly
 
-## Building the Feature Flag 
+### :star: Terraform through the CLI (Recommended)
+  - Prerequisites
+    - A *little* comfort with the command line
+    - Terraform CLI installed (this is super easy)
+  - [Instructions](https://replit.com/@LaunchDarkly/Launch-Features-with-LaunchDarkly#Terraform/README.md)
 
-In the `/terraform` directoy you'll find a `main.tf` file that contains a manifest for instantiating all the feature flags. Ensure you are updating the project name within this `main.tf` file with your own project. 
+****
+### Manually in the LaunchDarkly Console
+  1. Login to LaunchDarkly if you aren't already
+  2. **Step by step in the console**
+     1. Select `Create flag` on the right hand side
+     2. Give your feature flag the name `newui`
+     3. Leave this as a boolean flag, and ensure Client Side is checked
+     4. Select Save flag
 
-Execute the following commands: 
+****
 
-```bash
-terraform init 
-terraform apply 
-```
+## :champagne: Let's pop some flags :champagne:
 
-You'll be prompted for a LaunchDarkly API key which you can obtain via [LaunchDarkly](https://app.launchdarkly.com)
+:rocket: If you've set everything up, you should be ready to roll! :rocket:
+
+From here, we can enable our new feature and observe how our application changes based on a new feature being rolled out. 
+
+* `newui`
+  - This feature flag changes the view of the application out of the Osmo logo, introducing a new banner, image, and text.
