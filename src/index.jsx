@@ -11,7 +11,7 @@ let id = getUserId();
 
 (async () => {
   const LDProvider = await asyncWithLDProvider({
-    clientSideID: '62e091858bb81211dcf12aa7',
+    clientSideID: import.meta.env.VITE_LD_CLIENT_ID,
     user: {
       key: id,
       custom: {
