@@ -4,39 +4,33 @@
 
 This application is designed to use several feature flags to showcase the ability to release features quickly using [LaunchDarkly](https://www.launchdarkly.com). 
 
-**Note** - Sign up for a [free trial of LaunchDarkly](https://app.launchdarkly.com/signup) to explore creating these Feature Flags. <br>These can be created manually in the portal, or automatically leveraging tools like Terraform (instructions included!). 
+## Getting Started
+
+**Step 1** - Sign up for a [free trial of LaunchDarkly](https://app.launchdarkly.com/signup) to explore creating these Feature Flags.
+
+**Step 2** - Create the following feature flags within LaunchDarkly
+
+* `login`
+  - Create this flag as a boolean flag 
+  - This feature flag will be used to enable the login UI that can be used to leverage targeting based on a user ID. 
+* `newui`
+  - Create this flag as a boolean flag
+  - This feature flag changes the view of the application out of the Osmo logo, introducing a new banner, image, and text.
+
+**Step 3** - Obtain your LaunchDarkly Client-Side ID. You can obtain this from the `Settings > Project > Your Project Name` screen, or by pressing `CMD+K` or `CTRL+K`, typing "copy" and selecting `Copy SDK key for the current environment` and selecting **"Client-side ID"** from the list. 
+
+This will add it to your clipboard for easy copy and paste. 
 
 
-## Editing and Building in Replit
-
-**:warning: Important** - You'll need to create a secret in replit that references your LaunchDarkly <br>**Client-side ID**. 
+**Step 4** - Create a secret in Replit (the lock screen on the left side of your editor) that references your LaunchDarkly <br>**Client-side ID**. 
 
 The secret should be named: 
 > VITE_LD_CLIENT_ID
 
-and the value should hold be the `Client-side ID`
+and the value should hold be the `Client-side ID` from the clipboard in your earlier step (or the `Settings > Project > Your Project Name` screen)
 
-**:warning: Potential gotcha**: make sure you got the **"Client-side ID"** from the LaunchDarkly console and not one of the other keys! You can get this easily by pressing CMD+K or CTRL+K, typing "copy" and selecting `Copy SDK key for the current environment` and selecting **"Client-side ID"** from the list. This will add it to your clipboard for easy copy and paste. 
+**:warning: Potential gotcha**: make sure you got the **"Client-side ID"** from the LaunchDarkly console and not one of the other keys! 
 
-
-## Setting up the Feature Flags in LaunchDarkly
-
-### :star: Terraform through the CLI (Recommended)
-  - Prerequisites
-    - A *little* comfort with the command line
-    - Terraform CLI installed (this is super easy)
-  - [Instructions](https://replit.com/@LaunchDarkly/Launch-Features-with-LaunchDarkly#Terraform/README.md)
-
-****
-### Manually in the LaunchDarkly Console
-  1. Login to LaunchDarkly if you aren't already
-  2. **Step by step in the console**
-     1. Select `Create flag` on the right hand side
-     2. Give your feature flag the name `newui`
-     3. Leave this as a boolean flag, and ensure Client Side is checked
-     4. Select Save flag
-
-****
 
 ## :champagne: Let's pop some flags :champagne:
 
@@ -44,5 +38,7 @@ and the value should hold be the `Client-side ID`
 
 From here, we can enable our new feature and observe how our application changes based on a new feature being rolled out. 
 
+* `login`
+  - Enable this feature first. Your UI should update to include a login screen. We can use this login screen to configure `Targeting Rules` within LaunchDarkly to target feature releases at specific users. 
 * `newui`
-  - This feature flag changes the view of the application out of the Osmo logo, introducing a new banner, image, and text.
+  - Create a `targeting rule` for your user, for this feature flag. Ensure you set the `Default Rule` to false to ensure that only users who are targeted receive feature changes.
