@@ -4,9 +4,10 @@ import "./App.css";
 import { useFlags } from "launchdarkly-react-client-sdk";
 import Header from "./components/header";
 import Release from "./components/release";
+import Login from "./components/login";
 
 function App() {
-  const { newui } = useFlags();
+  const { login, newui } = useFlags();
   console.log(newui)
   return (
     <div className="App h-screen bg-black bg-cover bg-no-repeat">
@@ -21,20 +22,28 @@ function App() {
           </div>
           <header className="App-header App-fade row-start-1 xl:row-start-2 col-span-4 xl:col-span-3 xl:col-start-2 body grid">
             <Header />
+            {login ? 
+            <Login />
+              :
+            null}
           </header>
-          <div className="body grid row-start-3 col-span-4 xl:col-start-2 xl:col-span-3 xl:row-start-3">
-          <Release />
-        </div>
         </div>
         :
         (
-        <div className="grid h-screen items-center">
+        <div className="grid h-screen grid-rows-3 items-center">
           <img
                 src={ldlogo}
-                className="mx-auto App-pulse h-56 lg:h-60 2xl:h-80"
+                className="mx-auto row-start-1 xl:row-start-2 App-pulse h-56 lg:h-60 2xl:h-80"
                 alt="logo"
               />
+          <div className="body mx-auto row-start-3 w-full xl:w-1/3 items-center">
+            {login ? 
+            <Login />
+              :
+            null}
+          </div>
         </div>
+        
         )}
         </div>
   );
